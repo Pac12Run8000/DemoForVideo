@@ -1,6 +1,6 @@
 
 import SwiftUI
-import FirebaseAnalytics
+//import FirebaseAnalytics
 
 struct LoginPageView: View {
     @State private var username: String = ""
@@ -68,7 +68,7 @@ struct LoginPageView: View {
                     Alert(title: Text("Error"), message: Text("Invalid username or password"), dismissButton: .default(Text("OK")))
                 }
                 .onAppear {
-                                logScreenView(screenName: "ContentView", screenClass: "ContentView")
+//                                logScreenView(screenName: "ContentView", screenClass: "ContentView")
                             }
                 NavigationLink("", destination: MainTabView(), isActive: $navigateToMain)
                                    .hidden()
@@ -81,11 +81,11 @@ struct LoginPageView: View {
         
     }
     
-    func logScreenView(screenName: String, screenClass: String) {
-            Analytics.logEvent(AnalyticsEventScreenView,
-                               parameters: [AnalyticsParameterScreenName: screenName,
-                                            AnalyticsParameterScreenClass: screenClass])
-        }
+//    func logScreenView(screenName: String, screenClass: String) {
+//            Analytics.logEvent(AnalyticsEventScreenView,
+//                               parameters: [AnalyticsParameterScreenName: screenName,
+//                                            AnalyticsParameterScreenClass: screenClass])
+//        }
 }
 
 struct LoginPageView_Previews: PreviewProvider {

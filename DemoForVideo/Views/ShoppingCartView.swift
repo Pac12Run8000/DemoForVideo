@@ -1,5 +1,5 @@
 import SwiftUI
-import FirebaseAnalytics
+//import FirebaseAnalytics
 
 struct ShoppingCartView: View {
     let availableItems: [Item] = [
@@ -31,9 +31,13 @@ struct ShoppingCartView: View {
                             
                             Button(action: {
                                 if let index = cartItems.firstIndex(where: { $0.id == item.id }) {
+//                                    Analytics.logEvent("remove_item", parameters: ["item": cartItems[index].name])
                                     cartItems.remove(at: index)
+                                    
+                                    
                                 } else {
                                     cartItems.append(item)
+//                                    Analytics.logEvent("add_item", parameters: ["item": item.name])
                                 }
                             }) {
                                 Image(systemName: cartItems.contains(where: { $0.id == item.id }) ? "minus.circle" : "plus.circle")
@@ -61,8 +65,8 @@ struct ShoppingCartView: View {
                     }
                 }
                 Button(action: {
-                    let itemListString = generateCommaDelimitedItemNames(from: cartItems)
-                    logPurchaseConfirmedEvent(totalAmount: totalCost, itemList: itemListString, itemCount: cartItems.count)
+//                    let itemListString = generateCommaDelimitedItemNames(from: cartItems)
+//                    logPurchaseConfirmedEvent(totalAmount: totalCost, itemList: itemListString, itemCount: cartItems.count)
                                         checkoutMessage = "Transaction confirmed"
                                         showCheckoutAlert = true
                                     }) {
@@ -81,6 +85,7 @@ struct ShoppingCartView: View {
             .navigationBarTitle("Shopping Cart", displayMode: .inline)
         }
     }
+    /*
     func generateCommaDelimitedItemNames(from itemList: [Item]) -> String {
         let itemNames = itemList.map { $0.name }
         let commaDelimitedNames = itemNames.joined(separator: ", ")
@@ -94,6 +99,7 @@ struct ShoppingCartView: View {
             "item_count": NSNumber(value: itemCount)
         ])
     }
+     */
 
 }
 
