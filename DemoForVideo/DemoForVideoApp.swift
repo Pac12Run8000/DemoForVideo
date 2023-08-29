@@ -11,7 +11,7 @@ import SwiftUI
 struct DemoForVideoApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginPageView()
         }
     }
 }
