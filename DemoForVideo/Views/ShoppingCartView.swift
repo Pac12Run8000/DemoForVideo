@@ -1,4 +1,5 @@
 import SwiftUI
+import FirebaseAnalytics
 
 struct ShoppingCartView: View {
     let availableItems: [Item] = [
@@ -60,7 +61,8 @@ struct ShoppingCartView: View {
                     }
                 }
                 Button(action: {
-                    
+                    let itemListString = generateCommaDelimitedItemNames(from: cartItems)
+                    logPurchaseConfirmedEvent(totalAmount: totalCost, itemList: itemListString, itemCount: cartItems.count)
                                         checkoutMessage = "Transaction confirmed"
                                         showCheckoutAlert = true
                                     }) {
@@ -79,6 +81,20 @@ struct ShoppingCartView: View {
             .navigationBarTitle("Shopping Cart", displayMode: .inline)
         }
     }
+    func generateCommaDelimitedItemNames(from itemList: [Item]) -> String {
+        let itemNames = itemList.map { $0.name }
+        let commaDelimitedNames = itemNames.joined(separator: ", ")
+        return commaDelimitedNames
+    }
+    
+    func logPurchaseConfirmedEvent(totalAmount: Double, itemList: String, itemCount: Int) {
+        Analytics.logEvent("purchase_confirmed", parameters: [
+            "total_amount": NSNumber(value: totalAmount),
+            "item_list": itemList as NSString,
+            "item_count": NSNumber(value: itemCount)
+        ])
+    }
+
 }
 
 
